@@ -59,7 +59,8 @@ public class RestaurantDAO {
 				String rest_tel=rs.getString("RESTAURANT_TEL");
 				String rest_time=rs.getString("RESTAURANT_TIME");
 				
-				resList.add(new Restaurant());
+				Restaurant restaurant = new Restaurant(rest_id, rest_name, rest_Addr, rest_x, rest_y, rest_category, rest_sns, rest_tel, rest_time);
+			    resList.add(restaurant);
 				}
 
 		}finally {
