@@ -19,6 +19,7 @@ public class MemberDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	Properties prop;
+	
 	public MemberDAO() {
 		try {
 			prop = new Properties();

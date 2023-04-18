@@ -1,7 +1,7 @@
 // 지도 띄우기
 let container = document.getElementById("map");
 let mapOptions = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667),
+    center: new kakao.maps.LatLng(37.499, 127.0327),
     level: 3
 };
 
@@ -71,4 +71,39 @@ resestBtn.addEventListener("click",function(){
         categoryBtn[i].style.color = '#7c8b66';
     }
     
+})
+
+
+//화면이 켜지자 마자 전체 내용을 화면에 로드하는 ajax
+
+$(document).ready(function(){
+    
+ console.log("화면로드 함수 실행중")
+  
+  $.ajax({
+    url: "load",
+    type: "POST",
+    dataType: "JSON",
+    success: function (restList) {
+
+      if(restList !=null){
+        restList = [];
+      }
+     
+
+       let itemObj = restList;
+       console.log(itemObj);
+    
+      // restList 배열의 각 요소들을 addTask() 함수로 전달하여 처리
+      for (let item of itemObj) {
+
+       console.log(item);
+      }
+
+    },
+    error : function(error){
+      console.log("화면 로드 실패")
+    }
+  });
+
 })
