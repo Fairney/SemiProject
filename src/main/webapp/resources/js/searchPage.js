@@ -74,10 +74,7 @@ resestBtn.addEventListener("click",function(){
 })
 
 
-//화면이 켜지자 마자 전체 내용을 프론트에 로드하는 ajax
-// 레스토랑 정보가 담길 객체 itemObj, 객체 배열 itemList
-var itemObj;
-var itemList = [];
+//화면이 켜지자 마자 전체 내용을 화면에 로드하는 ajax
 
 $(document).ready(function(){
     
@@ -88,27 +85,21 @@ $(document).ready(function(){
     type: "POST",
     dataType: "JSON",
     success: function (restList) {
-        console.log(restList)
 
-     // 1. 서버에서 받아온 데이터를 객체로 변환
-     for (let i = 0; i < restList.length; i++) {
-        let item = restList[i];
-        let itemObj = {
-          id: item.rest_id,
-          name: item.rest_name,
-          address: item.rest_Addr,
-          lat: item.rest_x,
-          lng: item.rest_y,
-          category : item.rest_category
-        };
-        itemList.push(itemObj);
+      if(restList !=null){
+        restList = [];
       }
-    console.log("itemObj 객체 변환후:: "+itemObj);
-    console.log("itemObj 문자열 변환:: "+ JSON.stringify(itemObj))
-    
+     
 
-    render(itemList);
+       let itemObj = restList;
+       console.log(itemObj);
     
+      // restList 배열의 각 요소들을 addTask() 함수로 전달하여 처리
+      for (let item of itemObj) {
+
+       console.log(item);
+      }
+
     },
     error : function(error){
       console.log("화면 로드 실패")
@@ -116,25 +107,3 @@ $(document).ready(function(){
   });
 
 })
-
-//레스토랑 목록이 생성될 div
-var listContainer = document.getElementById("item-list");
-
-function render(itemList){
-    console.log("render() 실행중")
-  for (let item of itemList) {
-    var itemElement = document.createElement("div");
-    itemElement.classList.add("item");
-    itemElement.innerHTML = `
-        <div class="searchPage_res_item_info">
-            <span class="item-name">${item.category}</span>
-            <span class="item-category">${item.name}</span>
-            <span class="item-address">${item.address}</span>
-            <span><i class="fa-regular fa-heart"></i></span>
-        </div>
-        
-    `;
-    listContainer.appendChild(itemElement);
-
-    }
-}
